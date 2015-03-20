@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using SpartakiadeDemo.Entities;
+using SpartakiadeDemo.Navigation;
 using SpartakiadeDemo.Tasks;
 
 namespace SpartakiadeDemo.Details
@@ -12,14 +13,16 @@ namespace SpartakiadeDemo.Details
         public List<CommentViewModel> Comments { get; set; }
         private CommentViewModel _selectedComment;
 
-        public TaskDetailsViewModel(string uri)
+        public TaskDetailsViewModel(NavigationTarget target)
         {
-            var parts = uri.Split('/');
-            LoadData(int.Parse(parts[1]));
-
-            if (parts.Length == 4)
+            if (target is TaskTarget)
             {
-                _selectedComment = Comments.FirstOrDefault(x => x.Id == int.Parse(parts[3]));
+                LoadData((target as TaskTarget).TaskId);
+            }
+            if (target is CommentTarget)
+            {
+                LoadData((target as CommentTarget).TaskId);
+                _selectedComment = Comments.FirstOrDefault(x => x.Id == (target as CommentTarget).CommentId);
             }
         }
 

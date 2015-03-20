@@ -25,7 +25,7 @@ namespace SpartakiadeDemo.Lists
                 _selectedList = value;
                 NotifyOfPropertyChange(() => SelectedList);
 
-                NavigationService.Navigate("lists/" + _selectedList.Id);
+                NavigationService.Navigate(new ListTarget(_selectedList.Id));
             }
         }
     }

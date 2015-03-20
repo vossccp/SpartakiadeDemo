@@ -7,6 +7,18 @@ namespace SpartakiadeDemo.Navigation
 {
     public static class NavigationService
     {
+        public static void Navigate(NavigationTarget target)
+        {
+            if (target is ListTarget)
+            {
+                Navigate("lists/" + (target as ListTarget).ListId);
+            }
+            else
+            {
+                ((Frame)Window.Current.Content).Navigate(typeof(TaskDetailsPage), target);
+            }
+        }
+
         public static void Navigate(string uri)
         {
             if (uri.StartsWith("sparta://"))

@@ -1,6 +1,7 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using SpartakiadeDemo.Navigation;
 
 namespace SpartakiadeDemo.Details
 {
@@ -14,7 +15,8 @@ namespace SpartakiadeDemo.Details
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            DataContext = new TaskDetailsViewModel(e.Parameter + "");
+            NavigationService.CreateTarget(e.Parameter)
+            DataContext = new TaskDetailsViewModel((NavigationTarget) e.Parameter);
             NavInfo.Text = e.Parameter + "";
         }
 
