@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using SpartakiadeDemo.Entities;
-using SpartakiadeDemo.Tasks;
+using SpartakiadeDemo.Navigation;
 
 namespace SpartakiadeDemo.Lists
 {
@@ -27,7 +25,7 @@ namespace SpartakiadeDemo.Lists
                 _selectedList = value;
                 NotifyOfPropertyChange(() => SelectedList);
 
-                ((Frame)Window.Current.Content).Navigate(typeof(TasksPage), _selectedList.Id);
+                NavigationService.Navigate("lists/" + _selectedList.Id);
             }
         }
     }

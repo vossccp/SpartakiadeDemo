@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using Windows.UI.StartScreen;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using SpartakiadeDemo.Details;
 using SpartakiadeDemo.Entities;
+using SpartakiadeDemo.Navigation;
 
 namespace SpartakiadeDemo.Tasks
 {
@@ -43,7 +41,7 @@ namespace SpartakiadeDemo.Tasks
                 _selectedTask = value;
                 NotifyOfPropertyChange(() => _selectedTask);
 
-                ((Frame)Window.Current.Content).Navigate(typeof(TaskDetailsPage), "tasks/" + _selectedTask.Id);
+                NavigationService.Navigate("tasks/" + _selectedTask.Id);
             }
         }
     }

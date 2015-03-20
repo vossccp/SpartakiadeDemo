@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Navigation;
 using SpartakiadeDemo.Common;
 using SpartakiadeDemo.Details;
 using SpartakiadeDemo.Lists;
+using SpartakiadeDemo.Navigation;
 using SpartakiadeDemo.Tasks;
 
 namespace SpartakiadeDemo
@@ -35,16 +36,7 @@ namespace SpartakiadeDemo
             if (args.Kind == ActivationKind.Protocol)
             {
                 var protocolArgs = (ProtocolActivatedEventArgs)args;
-                var uri = protocolArgs.Uri.ToString().Substring(9);
-
-                if (uri.StartsWith("lists"))
-                {
-                    ((Frame)Window.Current.Content).Navigate(typeof(TasksPage), uri.Split('/')[1]);
-                }
-                else if (uri.StartsWith("task"))
-                {
-                    ((Frame)Window.Current.Content).Navigate(typeof(TaskDetailsPage), uri);
-                }
+                NavigationService.Navigate(protocolArgs.Uri.ToString());
             }
 
             Window.Current.Activate();
@@ -93,7 +85,7 @@ namespace SpartakiadeDemo
 
             if (!String.IsNullOrEmpty(e.Arguments))
             {
-                rootFrame.Navigate(typeof(TasksPage), e.Arguments);
+                NavigationService.Navigate(e.Arguments);
             }
 
             if (rootFrame.Content == null)
