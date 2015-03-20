@@ -29,6 +29,7 @@
         </ListView>
         <StackPanel Grid.Row="2" Background="Green">
             <TextBlock x:Name="NavInfo" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Margin="30" />
+            <Button Content="Pin to start" HorizontalAlignment="Center" Command="{Binding PinToStartCommand}" Margin="10"/>
         </StackPanel>
     </Grid>
 </Page>

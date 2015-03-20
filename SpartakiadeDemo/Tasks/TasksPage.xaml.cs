@@ -16,6 +16,7 @@ namespace SpartakiadeDemo.Tasks
         {
             base.OnNavigatedTo(e);
             DataContext = new TasksPageViewModel(long.Parse(e.Parameter + ""));
+            NavInfo.Text = e.Parameter + "";
         }
 
         private void OnBackButtonClick(object sender, RoutedEventArgs e)

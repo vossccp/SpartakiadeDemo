@@ -1,22 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 using SpartakiadeDemo.Lists;
+using SpartakiadeDemo.Tasks;
 
 namespace SpartakiadeDemo
 {
@@ -33,6 +24,21 @@ namespace SpartakiadeDemo
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+        }
+
+        // paste in explorer: solidnavigation://tasks/2/comments?commentid=8
+        protected async override void OnActivated(IActivatedEventArgs args)
+        {
+            base.OnActivated(args);
+
+            if (args.Kind == ActivationKind.Protocol)
+            {
+                var protocolArgs = (ProtocolActivatedEventArgs)args;
+                var listId = protocolArgs.Uri.ToString().Split('/')[2];
+                ((Frame)Window.Current.Content).Navigate(typeof(TasksPage), listId);
+            }
+
+            Window.Current.Activate();
         }
 
         /// <summary>
@@ -70,6 +76,11 @@ namespace SpartakiadeDemo
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
+            }
+
+            if (!String.IsNullOrEmpty(e.Arguments))
+            {
+                rootFrame.Navigate(typeof(TasksPage), e.Arguments);
             }
 
             if (rootFrame.Content == null)

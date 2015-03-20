@@ -18,6 +18,11 @@
       <m2:VisualElements DisplayName="SpartakiadeDemo" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="SpartakiadeDemo" ForegroundText="light" BackgroundColor="#FFFFFF">
         <m2:SplashScreen Image="Assets\SplashScreen.png" />
       </m2:VisualElements>
+      <Extensions>
+        <Extension Category="windows.protocol">
+          <Protocol Name="sparta" />
+        </Extension>
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>
