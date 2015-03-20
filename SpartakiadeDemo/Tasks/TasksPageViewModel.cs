@@ -28,7 +28,7 @@ namespace SpartakiadeDemo.Tasks
             PinToStartCommand = new DelegateCommand(async () =>
             {
                 var logo = new Uri("ms-appx:///Assets/Logo.png");
-                var secondaryTile = new SecondaryTile(Guid.NewGuid() + "", list.Title, listId + "", logo, TileSize.Square150x150);
+                var secondaryTile = new SecondaryTile(Guid.NewGuid() + "", list.Title, "lists/" + listId, logo, TileSize.Square150x150);
                 secondaryTile.VisualElements.ShowNameOnSquare150x150Logo = true;
                 await secondaryTile.RequestCreateAsync();
             });
@@ -43,7 +43,7 @@ namespace SpartakiadeDemo.Tasks
                 _selectedTask = value;
                 NotifyOfPropertyChange(() => _selectedTask);
 
-                ((Frame)Window.Current.Content).Navigate(typeof(TaskDetailsPage), _selectedTask.Id);
+                ((Frame)Window.Current.Content).Navigate(typeof(TaskDetailsPage), "tasks/" + _selectedTask.Id);
             }
         }
     }

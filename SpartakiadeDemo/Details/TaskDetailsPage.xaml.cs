@@ -14,7 +14,7 @@ namespace SpartakiadeDemo.Details
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            DataContext = new TaskDetailsViewModel(long.Parse(e.Parameter + ""));
+            DataContext = new TaskDetailsViewModel(e.Parameter + "");
             NavInfo.Text = e.Parameter + "";
         }
 

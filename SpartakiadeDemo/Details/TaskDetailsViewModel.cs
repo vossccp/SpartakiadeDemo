@@ -12,6 +12,17 @@ namespace SpartakiadeDemo.Details
         public List<CommentViewModel> Comments { get; set; }
         private CommentViewModel _selectedComment;
 
+        public TaskDetailsViewModel(string uri)
+        {
+            var parts = uri.Split('/');
+            LoadData(int.Parse(parts[1]));
+
+            if (parts.Length == 4)
+            {
+                _selectedComment = Comments.FirstOrDefault(x => x.Id == int.Parse(parts[3]));
+            }
+        }
+
         public TaskDetailsViewModel(long taskId)
         {
             LoadData(taskId);

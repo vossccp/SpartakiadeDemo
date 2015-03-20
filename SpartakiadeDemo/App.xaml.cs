@@ -7,6 +7,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 using SpartakiadeDemo.Common;
+using SpartakiadeDemo.Details;
 using SpartakiadeDemo.Lists;
 using SpartakiadeDemo.Tasks;
 
@@ -34,8 +35,16 @@ namespace SpartakiadeDemo
             if (args.Kind == ActivationKind.Protocol)
             {
                 var protocolArgs = (ProtocolActivatedEventArgs)args;
-                var listId = protocolArgs.Uri.ToString().Split('/')[2];
-                ((Frame)Window.Current.Content).Navigate(typeof(TasksPage), listId);
+                var uri = protocolArgs.Uri.ToString().Substring(9);
+
+                if (uri.StartsWith("lists"))
+                {
+                    ((Frame)Window.Current.Content).Navigate(typeof(TasksPage), uri.Split('/')[1]);
+                }
+                else if (uri.StartsWith("task"))
+                {
+                    ((Frame)Window.Current.Content).Navigate(typeof(TaskDetailsPage), uri);
+                }
             }
 
             Window.Current.Activate();
@@ -66,7 +75,7 @@ namespace SpartakiadeDemo
                 rootFrame = new Frame();
 
                 SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
-                
+
                 // Set the default language
                 rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
 
